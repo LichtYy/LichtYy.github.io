@@ -1,2 +1,2 @@
 # LichtYy.github.io
-test o personal homepage
+test for personal homepage
