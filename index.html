@@ -1265,10 +1265,70 @@ Weiguo Wang, Susu Yang, Longlong Sun (Ph.D since 2020), Dan Li, Li Wang, Di Yang
     <!--<script src="https://bibbase.org/show?bib=lihuixidian.github.io%2Flihui.bib&commas=true&jsonp=1&theme=side"></script>-->
     <!-- <script src="https://cdn.bootcdn.net/ajax/libs/jquery/2.2.4/jquery.min.js"></script> -->
     <script>
-      $.get("https://bibbase.org/show?bib=lihuixidian.github.io%2Flihui.bib&commas=true&jsonp=1", function (data) {
-        alert("Data: " + data);
-      });
+      /**
+    * 监控页面静态资源加载报错
+    */
+      function loadResourceError() {
+        window.addEventListener('error', function (e) {
+          console.log(e, '错误捕获===');
+          if (e) {
+            let target = e.target || e.srcElement;
+            let isElementTarget = target instanceof HTMLElement;
+            if (!isElementTarget) {
+              // js错误
+              // js error处理
+            } else {
+              // 页面静态资源加载错误处理
+              console.log('资源加载错误===');
+              let { type, timeStamp, target } = e;
+              let { localName, outerHTML, tagName, src } = target;
+              let typeName = target.localName;
+              let sourceUrl = "";
+              if (typeName === "link") {
+                sourceUrl = target.href;
+              } else if (typeName === "script") {
+                sourceUrl = target.src;
+              }
+              console.log('资源加载失败，请刷新页面或切换网络重试。(' + sourceUrl + ')');
+              console.log('bibbase_data:', bibbase_data);
+              //   setTimeout(() => {
+              //     // 这里可以添加一些处理逻辑，比如重试加载资源等
+              //     console.log('尝试重新加载资源...');
+              //     // location.reload(); // 例如，刷新页面
+              //     console.log('bibbase_data:', bibbase_data);
+              //   }, 2000); // 2秒后尝试重新加载资源
+              if (sourceUrl === 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js') {
+                console.log('yes')
+                var bibbase_data_new = bibbase_data.data.replace('https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js', 'https://cdn.bootcdn.net/ajax/libs/jquery/2.2.4/jquery.min.js')
+                var bbhtml_new = bibbase_data_new.split('<div id="bibbase">')[1].split("</div>")[0];
+                // document.replaceChild(document.getElementById("bibbase"), document.createElement("div", { id: "bibbase1", innerHTML: bbhtml_new }));
+                // document.getElementById("bibbase").setAttribute("innerHTML", bbhtml_new);
+                // document.createElement('script', { src: 'https://cdn.bootcdn.net/ajax/libs/jquery/2.2.4/jquery.min.js' });
+                var script = document.createElement("script");
+                script.src = "https://cdn.bootcdn.net/ajax/libs/jquery/2.2.4/jquery.min.js";
+                document.body.appendChild(script);
+                document.getElementById("bibbase").innerHTML = bbhtml_new;
+                // var bb_new = document.createElement("div", { "id": "bibbase1", "innerHTML": bbhtml_new });
+                // // document.body.replaceChild(bb_new, document.getElementById("bibbase"));
+                // document.body.removeChild(document.getElementById("bibbase"));
+                // document.write("<div id='bibbase'>" + bbhtml_new + "</div>");
+                // document.body.replaceChild(bb_new, document.getElementById("bibbase"));
+                // $.ajax({
+                //   url: "#",
+                //   success: function (data) {
+                //     $("#bibbase").html(bbhtml_new);
+                //   }
+                // });
+              }
+            }
+          }
+          // 设为true表示捕获阶段调用，会在元素的onerror前调用,在window.addEventListener('error')后调用
+        }, true);
+      }
+      // 我们根据e.target的属性来判断它是link标签，还是script标签。目前只关注只监控了css，js文件加载错误的情况。
+      loadResourceError();
     </script>
+    <script src="https://bibbase.org/show?bib=lihuixidian.github.io%2Flihui.bib&commas=true&jsonp=1"></script>
     <!-- <script th:src="@{/js/jquery.min.js}"></script>
     <script th:src="@{/js/jquery-migrate.js}"></script>
     <script src="https://bibbase.org/show?bib=lihuixidian.github.io%2Flihui.bib&commas=true&jsonp=1"></script> -->
