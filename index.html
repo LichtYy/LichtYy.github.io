@@ -7,6 +7,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
+  <!-- Content Security Policy -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://bibbase.org/;">
+
   <!-- Site Properties -->
   <title>Li Hui's academic homepage</title>
   <link rel="stylesheet" type="text/css" href="semantic.css">
@@ -1342,7 +1345,7 @@ Weiguo Wang, Susu Yang, Longlong Sun (Ph.D since 2020), Dan Li, Li Wang, Di Yang
       src="https://bibbase.org/show?bib=lihuixidian.github.io%2Flihui.bib&commas=true&jsonp=1&callback=handleData"></script> -->
 
 
-    <script>
+    <!-- <script>
       // 定义一个全局函数，用于处理JSONP响应
       function handleResponse(data) {
         console.log(data) // 假设控制台输出：{ name: 'John Doe', age: 30 }
@@ -1373,7 +1376,7 @@ Weiguo Wang, Susu Yang, Longlong Sun (Ph.D since 2020), Dan Li, Li Wang, Di Yang
       setTimeout(function () {
         fetchData()
       }, 2000)
-    </script>
+    </script> -->
     <!-- <script>
       window.onload = function() {
         var script = document.createElement("script");
