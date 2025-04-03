@@ -2429,17 +2429,17 @@ Weiguo Wang, Susu Yang, Longlong Sun (Ph.D since 2020), Dan Li, Li Wang, Di Yang
                 sourceUrl = target.href;
               } else if (typeName === "script") {
                 sourceUrl = target.src;
-                if (
-                  sourceUrl ===
-                  "https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"
-                ) {
-                  window.onload = function () {
-                    var bibbase_reload = document.createElement("script");
-                    bibbase_reload.src = "bibbase_reload.js";
-                    document.body.appendChild(bibbase_reload);
-                  };
-                  console.log("jquery加载失败了，重新加载了");
-                }
+              }
+              if (
+                sourceUrl ===
+                "https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"
+              ) {
+                window.onload = function () {
+                  var bibbase_reload = document.createElement("script");
+                  bibbase_reload.src = "bibbase_reload.js";
+                  document.body.appendChild(bibbase_reload);
+                };
+                console.log("jquery加载失败了，重新加载了");
               }
             }
           }
