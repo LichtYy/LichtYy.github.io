@@ -2408,41 +2408,45 @@ Weiguo Wang, Susu Yang, Longlong Sun (Ph.D since 2020), Dan Li, Li Wang, Di Yang
     </script>
     <!-- <script src="detect_reload.js"></script> -->
     <script>
-      window.onerror = function (e) {
-        // console.log(e, '错误捕获===');
-        if (e) {
-          let target = e.target || e.srcElement;
-          let isElementTarget = target instanceof HTMLElement;
-          if (!isElementTarget) {
-            // js错误
-            let { type, timeStamp, target } = e;
-            let { localName, outerHTML, tagName, src } = target;
-            console.log('资源加载错误===', type, timeStamp, target, localName, outerHTML, tagName, src);
-            // js error处理
-            if (
-              src ===
-              // "https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"
-              "https://bibbase.org/js/bibbase.min.js"  // until bibbase.js is loaded, it will be replaced by bibbase_reload.js
-            ) {
-              var bibbase_reload = document.createElement("script");
-              bibbase_reload.src = "bibbase_reload.js";
-              document.body.appendChild(bibbase_reload);
-              console.log("jquery加载失败了，重新加载了");
-              window.onload = function () {
-                setTimeout(function () {
-                  var bibbase_reload = document.createElement("script");
-                  bibbase_reload.src = "bibbase_reload.js";
-                  document.body.appendChild(bibbase_reload);
-                  console.log("jquery加载成功了");
-                }, 1000);
-              };
-            }
-
-          } else {
-            // 页面静态资源加载错误处理
-            // console.log('资源加载错误===');
+      window.onerror = function (error, url, line, column, stack) {
+        console.log("GeeksforGeeks Error: ");
+        console.log("Stack: " + stack);
+      };
+      // window.onerror = function (e) {
+      // console.log(e, '错误捕获===');
+      if (e) {
+        let target = e.target || e.srcElement;
+        let isElementTarget = target instanceof HTMLElement;
+        if (!isElementTarget) {
+          // js错误
+          let { type, timeStamp, target } = e;
+          let { localName, outerHTML, tagName, src } = target;
+          console.log('资源加载错误===', type, timeStamp, target, localName, outerHTML, tagName, src);
+          // js error处理
+          if (
+            src ===
+            // "https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"
+            "https://bibbase.org/js/bibbase.min.js"  // until bibbase.js is loaded, it will be replaced by bibbase_reload.js
+          ) {
+            var bibbase_reload = document.createElement("script");
+            bibbase_reload.src = "bibbase_reload.js";
+            document.body.appendChild(bibbase_reload);
+            console.log("jquery加载失败了，重新加载了");
+            window.onload = function () {
+              setTimeout(function () {
+                var bibbase_reload = document.createElement("script");
+                bibbase_reload.src = "bibbase_reload.js";
+                document.body.appendChild(bibbase_reload);
+                console.log("jquery加载成功了");
+              }, 1000);
+            };
           }
+
+        } else {
+          // 页面静态资源加载错误处理
+          // console.log('资源加载错误===');
         }
+      }
       };
     </script>
     <script src="https://bibbase.org/show?bib=lihuixidian.github.io%2Flihui.bib&commas=true&jsonp=1"></script>
