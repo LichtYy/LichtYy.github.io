@@ -34,7 +34,7 @@
       console.log(line) //错误在哪一行
       console.log(col) //错误发生的列号
       console.log(error) //完整的错误信息
-      return true //表示不把错误信息打印到控制台
+      // return true //表示不把错误信息打印到控制台
       if (error === "TypeError: Cannot read properties of null (reading 'noConflict')" || error === 'TypeError: Cannot read properties of null (reading "noConflict")') {
         var bibbase_reload = document.createElement("script");
         bibbase_reload.src = "bibbase_reload.js";
