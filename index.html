@@ -35,7 +35,8 @@
       console.log(col) //错误发生的列号
       console.log(error) //完整的错误信息
       // return true //表示不把错误信息打印到控制台
-      if (error === "TypeError: Cannot read properties of null (reading 'noConflict')" || error === 'TypeError: Cannot read properties of null (reading "noConflict")') {
+      // if (error === "TypeError: Cannot read properties of null (reading 'noConflict')" || error === 'TypeError: Cannot read properties of null (reading "noConflict")') {
+      if ((error.startsWith("TypeError") && error.includes("Cannot read properties of null") && error.includes("noConflict")) || (msg.startsWith("Uncaught TypeError") && msg.includes("Cannot read properties of null") && msg.includes("noConflict"))) {
         var bibbase_reload = document.createElement("script");
         bibbase_reload.src = "bibbase_reload.js";
         document.body.appendChild(bibbase_reload);
